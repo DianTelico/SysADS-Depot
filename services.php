@@ -57,6 +57,50 @@
                 width: 25%; /* Occupe 25% sur les grands écrans */
             }
         }
+
+        #navMenu
+        {
+             background-color: rgb(240,240,240);
+        }
+
+        #navMenu .nav-link
+        {
+           
+            text-align : left ;
+            border : 2px solid white;
+            font-family: serif ;
+            font-weight: bold ;
+           
+        }
+
+        #tabStatic
+        {
+             
+        }
+
+        
+         /* Media query pour centrer le menu utilisateur sur mobile */
+        @media (max-width: 768px) {
+            .user-menu {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+        }
+
+        /* Media query pour les grands écrans : alignement à droite */
+        @media (min-width: 769px) {
+            .user-menu {
+                 
+                 position: relative;
+                 right: 200px;
+            }
+        }
+
+         .dropdown  li
+        {
+            background-color: rgb(240,240,240);
+        }
         
 
     </style>
@@ -86,10 +130,36 @@
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <a href="#" class="btn btn-secondary" style="
-                    background-color: white; color:#007bff; font-family: serif;
+                     <!-- Menu utilisateur avec drop-down -->
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Utilisateur
+                             </button>
+    
+                            <div class="dropdown  user-menu ">
+                                
+                                <ul class="dropdown-menu  p-2 mt-3" aria-labelledby="dropdownMenuButton">
+                                    <li class="dropdown-item dropdown-item-custom ">
+                                        <div class="d-flex align-items-center">
+                                            <!-- Photo de l'utilisateur -->
+                                            <img src="image/LogoADS.jpg" alt="Photo utilisateur" class="user-photo me-2" 
+                                            style="width:50px; height: 50px; border: 1px solid blue; padding: 5px;">
+                                            <!-- Infos utilisateur -->
+                                            <div>
+                                                <p class="mb-0"><strong>ID: </strong>12345</p>
+                                                <p class="mb-0">Jean Dupont  </p>
+                                            </div>
 
-                    ">Utilisateur</a>
+                                        </div>
+                                    </li>
+                                    <li><hr class="dropdown-divider "></li>
+                                    <!-- Bouton Modifier le profil -->
+                                    <li><a class="dropdown-item" href="#">Editer le profile</a></li>
+                                    <!-- Bouton Parametre -->
+                                    <li><a class="dropdown-item" href="#">Parametre</a></li>
+                                    <!-- Bouton Déconnexion -->
+                                    <li><a class="dropdown-item" href="#">Déconnexion</a></li>
+                                </ul>
+                            </div>
 
                 </div>
             </div>
@@ -97,14 +167,43 @@
     </nav>
 
     <!-- Contenu principal -->
-    <div class="container mt-1">
-          <div id="submenu" class="bg-light py-2">
-                <a href="#" class="nav-link">Distribution Internet</a>
-                <a href="#" class="nav-link">Transfer d'argent</a>
-                <a href="#" class="nav-link">Prestation Digital</a>
-                <a href="#" class="nav-link">Formation</a>
-                <a href="#" class="nav-link">Vente</a>
-          </div>
+    <div class="container mt-1" >
+         <div class="d-flex align-items-start" >
+            <div id="navMenu" class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                        Tableau de Bord 
+                </button>
+                 <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                         Distribution Internet
+                </button>
+                <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                        Transfer d'argent
+                </button>
+                <button class="nav-link" id="v-pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#v-pills-disabled" type="button" role="tab" aria-controls="v-pills-disabled" aria-selected="false">
+                        Prestation Digital
+                </button>
+                <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                        Formations
+                </button>
+                <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+                        Vente
+                </button>
+            </div>
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
+                        
+                </div>
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
+                       <div  id="">
+                          
+                       </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">...</div>
+                <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab" tabindex="0">...</div>
+                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">...</div>
+                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" tabindex="0">...</div>
+            </div>
+        </div>
     </div>
 
     <!-- Lien vers Bootstrap JS -->

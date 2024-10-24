@@ -48,11 +48,7 @@
 
          .dropdown .dropdown-item
         {
-            
-            
             background-color: #007bff;
-            
-
         }
 
        
@@ -119,8 +115,7 @@
                                             <!-- Infos utilisateur -->
                                             <div>
                                                 <p class="mb-0"><strong>ID: </strong>12345</p>
-                                                <p class="mb-0"><strong>Nom: </strong>Jean Dupont  </p>
-                                                <p class="mb-0"><strong>Prénom:</strong> Jean</p>
+                                                <p class="mb-0">Jean Dupont  </p>
                                             </div>
 
                                         </div>
