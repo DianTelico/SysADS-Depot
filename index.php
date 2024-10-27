@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exemple Bootstrap Local</title>
     <!-- Lien vers le fichier CSS de Bootstrap local -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
@@ -15,6 +15,6 @@
     </div>
     
     <!-- Lien vers le fichier JavaScript de Bootstrap local -->
-    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

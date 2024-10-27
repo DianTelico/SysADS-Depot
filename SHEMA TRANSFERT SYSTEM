@@ -1,0 +1,103 @@
+CREATE TABLE Beneficiaires (
+    beneficiaire_id SERIAL PRIMARY KEY,      
+    nom_complet VARCHAR(100) NOT NULL,      
+    adresse VARCHAR(255),                    
+    pays_residence VARCHAR(50) NOT NULL,     
+    telephone VARCHAR(20),                  
+    email VARCHAR(100),                      
+    type_identification VARCHAR(50),         
+    numero_identification VARCHAR(50),       
+    date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE CodesTransfert (
+    code_id int(10) PRIMARY KEY,                  
+    beneficiaire_id INT NOT NULL,                
+    code_mtcn VARCHAR(10) NOT NULL,              
+    date_presentation TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    statut_validation VARCHAR(20) CHECK (statut_validation IN ('Validé', 'Rejeté')), 
+    point_transfert VARCHAR(100),                
+    montant_recu DECIMAL(10, 2),                 
+    date_retrait TIMESTAMP,                      
+    FOREIGN KEY (beneficiaire_id) REFERENCES Beneficiaires(beneficiaire_id) 
+);
+
+
+CREATE TABLE RequetesValidation (
+    requete_id INT(10) PRIMARY KEY,
+    code_id INT(10) NOT NULL,
+    date_requete TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    statut_requete VARCHAR(20) CHECK (statut_requete IN ('En attente', 'En cours', 'Acceptée', 'Rejetée')),
+    raison_rejet TEXT,
+    point_transfert VARCHAR(100) NOT NULL,
+    agent_responsable VARCHAR(100),
+    details_supplementaires TEXT,              
+    FOREIGN KEY (code_id) REFERENCES CodesTransfert(code_id)
+);
+
+CREATE TABLE Agences (
+    agence_id INT(10) PRIMARY KEY,                
+    nom_agence VARCHAR(100) NOT NULL,             
+    adresse VARCHAR(255),                         
+    ville VARCHAR(100),                          
+    pays VARCHAR(50) NOT NULL,                    
+    telephone VARCHAR(20),                        
+    email VARCHAR(100),                           
+    responsable_agence VARCHAR(100),              
+    date_inscription TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE RequetesValidation
+ADD agence_id INT(10),                          
+ADD CONSTRAINT fk_agence                         
+FOREIGN KEY (agence_id) REFERENCES Agences(agence_id);
+
+CREATE TABLE Paiement (
+    paiement_id INT(10) PRIMARY KEY,                     
+    requete_id INT(10) NOT NULL,                         
+    beneficiaire_id INT(10) NOT NULL,                    
+    date_paiement TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   
+    montant DECIMAL(10, 2) NOT NULL,                     
+    mode_paiement VARCHAR(50) CHECK (mode_paiement IN ('Espèces', 'Virement', 'Chèque', 'Autre')), 
+    statut_paiement VARCHAR(20) CHECK (statut_paiement IN ('Réalisé', 'Échoué')), 
+    agent_responsable VARCHAR(100),                      
+    FOREIGN KEY (requete_id) REFERENCES RequetesValidation(requete_id),  
+    FOREIGN KEY (beneficiaire_id) REFERENCES Beneficiaires(beneficiaire_id)  
+);
+
+CREATE TABLE Transactions (
+    transaction_id INT(10) PRIMARY KEY,                    
+    agence_id INT(10) NOT NULL,                            
+    date_transaction TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
+    type_transaction VARCHAR(50) CHECK (type_transaction IN ('Commission', 'Remboursement')), 
+    montant DECIMAL(10, 2) NOT NULL,                      
+    description TEXT,                                      
+    statut_transaction VARCHAR(20) CHECK (statut_transaction IN ('Réalisée', 'En attente', 'Échouée')), 
+    nom_agent_responsable VARCHAR(100),                    
+    agent_id INT(10),                                      
+    FOREIGN KEY (agence_id) REFERENCES Agences(agence_id)  
+);
+
+CREATE TABLE ComptesAgences (
+    compte_id INT(10) PRIMARY KEY,                       
+    agence_id INT(10) NOT NULL,                          
+    numero_compte VARCHAR(50) NOT NULL UNIQUE,          
+    type_compte VARCHAR(50) CHECK (type_compte IN ('Commission', 'Remboursement')), 
+    solde DECIMAL(10, 2) DEFAULT 0.00,                   
+    date_ouverture TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   
+    statut_compte VARCHAR(20) CHECK (statut_compte IN ('Actif', 'Inactif')), 
+    FOREIGN KEY (agence_id) REFERENCES Agences(agence_id)  
+);
+
+CREATE TABLE CanauxTransfert (
+    canal_id INT(10) PRIMARY KEY,                         
+    agence_id INT(10) NOT NULL,                          
+    nom_canal VARCHAR(100) NOT NULL,                     
+    statut_canal VARCHAR(20) CHECK (statut_canal IN ('Actif', 'Inactif')), 
+    FOREIGN KEY (agence_id) REFERENCES Agences(agence_id) 
+);
+
+ALTER TABLE CodesTransfert
+ADD canal_id INT(10),                          
+ADD CONSTRAINT fk_canal                         
+FOREIGN KEY (canal_id) REFERENCES CanauxTransfert(canal_id);
