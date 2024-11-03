@@ -6,72 +6,8 @@
     <title>Page d'accueil</title>
     <!-- Lien vers Bootstrap CSS -->
     <link rel="stylesheet" href="bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/css/bootstrap.min.css">    
-    <style>
-        body {
-            padding-top: 70px; /* Espace pour l'en-tête fixe */
-        }
-        .navbar-brand {
-            font-weight: bold; /* Met en gras le nom de la marque */
-        }
-
-         /* Ajouter une bande de fond lors du survol */
-        .navbar-nav .nav-link:hover {
-            background-color: #f1f1f1; /* Couleur de la bande de survol */
-            color: #333;               /* Changer la couleur du texte sur survol */
-        }
-
-        .navbar ul a
-        {
-           font-size: 12px;
-           color: white;
-           font-weight: bold;
-           font-family: serif;
-           border-left: 2px solid white;
-           padding-left: 2px;
-           margin-bottom: 5px;
-        }
-
-        .dropdown
-        {
-            font-family: serif;
-            font-size: 13px;
-            padding: 15px;  
-
-        }
+    <link rel="stylesheet" href="./style.css">
         
-        .dropdown p
-        {
-            
-            font-size: 13px; 
-            
-        }
-
-         .dropdown .dropdown-item
-        {
-            background-color: #007bff;
-        }
-
-       
-
-         /* Media query pour centrer le menu utilisateur sur mobile */
-        @media (max-width: 768px) {
-            .user-menu {
-                display: flex;
-                justify-content: center;
-                width: 100%;
-            }
-        }
-
-        /* Media query pour les grands écrans : alignement à droite */
-        @media (min-width: 769px) {
-            .user-menu {
-                 
-                 position: relative;
-                 right: 200px;
-            }
-        }
-
-    </style>
 </head>
 <body>
 
